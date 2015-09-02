@@ -60,6 +60,7 @@ class VEHICLE_TAGS(CONST_CONTAINER):
     OBSERVER = 'observer'
     DISABLED_IN_ROAMING = 'disabledInRoaming'
     EVENT = 'event_battles'
+    EXCLUDED_FROM_SANDBOX = 'excluded_from_sandbox'
 
 
 class Vehicle(FittingItem, HasStrCD):
@@ -548,6 +549,10 @@ class Vehicle(FittingItem, HasStrCD):
     @property
     def isSpecial(self):
         return _checkForTags(self.tags, VEHICLE_TAGS.SPECIAL)
+
+    @property
+    def isExcludedFromSandbox(self):
+        return _checkForTags(self.tags, VEHICLE_TAGS.EXCLUDED_FROM_SANDBOX)
 
     @property
     def isObserver(self):

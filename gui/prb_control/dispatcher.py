@@ -498,11 +498,12 @@ class _PrebattleDispatcher(object):
             return
         prbFunctional = self.getFunctional(CTRL_ENTITY_TYPE.PREBATTLE)
         prbType = 0
-        if prbFunctional and prbFunctional.getExit() not in [FUNCTIONAL_EXIT.NO_FUNC,
+        if prbFunctional and prbFunctional.getExit() not in (FUNCTIONAL_EXIT.NO_FUNC,
          FUNCTIONAL_EXIT.BATTLE_TUTORIAL,
          FUNCTIONAL_EXIT.RANDOM,
          FUNCTIONAL_EXIT.SWITCH,
-         FUNCTIONAL_EXIT.SQUAD]:
+         FUNCTIONAL_EXIT.SQUAD,
+         FUNCTIONAL_EXIT.FALLOUT):
             prbType = prbFunctional.getPrbType()
         self._changePrbFunctional(prbType=prbType, stop=False)
 

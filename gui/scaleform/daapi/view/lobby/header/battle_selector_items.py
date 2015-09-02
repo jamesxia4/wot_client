@@ -217,12 +217,12 @@ class _CompanyItem(_SelectorItem):
         finishTimeLeft = battle.getDestroyingTimeLeft()
         if startTimeLeft is not None and startTimeLeft > 0:
             if startTimeLeft < time_utils.ONE_DAY:
-                return text_styles.alert(i18n.makeString(MENU.HEADERBUTTONS_BATTLE_AVAILABLESINCESOON, time=text_styles.stats(time_formatters.getTimeDurationStr(startTimeLeft))))
+                return text_styles.alert(i18n.makeString(MENU.HEADERBUTTONS_BATTLE_AVAILABLESINCESOON, time=text_styles.stats(time_formatters.getTimeDurationStr(startTimeLeft, True))))
             else:
                 return text_styles.stats(i18n.makeString(MENU.HEADERBUTTONS_BATTLE_AVAILABLESINCE, datetime=self._getDateTimeString(battle.startTime)))
         elif finishTimeLeft is not None and finishTimeLeft > 0:
             if finishTimeLeft < time_utils.ONE_DAY:
-                return text_styles.success(i18n.makeString(MENU.HEADERBUTTONS_BATTLE_AVAILABLEUNTILSOON, time=text_styles.stats(time_formatters.getTimeDurationStr(finishTimeLeft))))
+                return text_styles.success(i18n.makeString(MENU.HEADERBUTTONS_BATTLE_AVAILABLEUNTILSOON, time=text_styles.stats(time_formatters.getTimeDurationStr(finishTimeLeft, True))))
             else:
                 return text_styles.success(i18n.makeString(MENU.HEADERBUTTONS_BATTLE_AVAILABLEUNTIL, datetime=self._getDateTimeString(battle.finishTime)))
 

@@ -118,6 +118,7 @@ class CYBERSPORT(object):
     WINDOW_UNIT_MESSAGE_SQUADINBATTLE = '#cyberSport:window/unit/message/squadInBattle'
     WINDOW_UNIT_MESSAGE_FALLOUTLEVEL = '#cyberSport:window/unit/message/falloutLevel'
     WINDOW_UNIT_MESSAGE_FALLOUTMIN = '#cyberSport:window/unit/message/falloutMin'
+    WINDOW_UNIT_MESSAGE_FALLOUTGROUPNOTREADY = '#cyberSport:window/unit/message/falloutGroupNotReady'
     WINDOW_UNIT_READY = '#cyberSport:window/unit/ready'
     WINDOW_UNIT_NOTREADY = '#cyberSport:window/unit/notReady'
     WINDOW_UNIT_FIGHT = '#cyberSport:window/unit/fight'

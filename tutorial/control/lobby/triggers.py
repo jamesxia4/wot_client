@@ -4,6 +4,7 @@ import dossiers2
 from AccountCommands import RES_SUCCESS
 from CurrentVehicle import g_currentVehicle
 from gui.ClientUpdateManager import g_clientUpdateManager
+from gui.shared.ItemsCache import g_itemsCache
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from tutorial.control import game_vars
 from tutorial.control.triggers import Trigger, TriggerWithValidateVar, TriggerWithSubscription
@@ -16,7 +17,8 @@ __all__ = ['BonusTrigger',
  'EquipmentInstalledTrigger',
  'CurrentVehicleChangedTrigger',
  'FreeVehicleSlotChangedTrigger',
- 'PremiumPeriodChangedTrigger']
+ 'PremiumPeriodChangedTrigger',
+ 'PremiumDiscountUseTrigger']
 
 class BonusTrigger(Trigger):
 
@@ -224,6 +226,32 @@ class PremiumPeriodChangedTrigger(Trigger):
         self.isSubscribed = False
 
     def __onPremiumExpiryTimeChanged(self, _):
+        self.toggle(isOn=self.isOn())
+
+
+class PremiumDiscountUseTrigger(Trigger):
+
+    def __init__(self, triggerID):
+        super(PremiumDiscountUseTrigger, self).__init__(triggerID)
+        self._premiumDiscounts = g_itemsCache.items.shop.personalPremiumPacketsDiscounts
+
+    def run(self):
+        if not self.isSubscribed:
+            self.isSubscribed = True
+            g_clientUpdateManager.addCallbacks({'goodies': self.__onDiscountsChange})
+
+    def isOn(self):
+        newDiscounts = g_itemsCache.items.shop.personalPremiumPacketsDiscounts
+        result = len(newDiscounts) < len(self._premiumDiscounts)
+        self._premiumDiscounts = newDiscounts
+        return result
+
+    def clear(self):
+        g_clientUpdateManager.removeObjectCallbacks(self)
+        self.isSubscribed = False
+        self._premiumDiscounts = None
+
+    def __onDiscountsChange(self, *args):
         self.toggle(isOn=self.isOn())
 
 

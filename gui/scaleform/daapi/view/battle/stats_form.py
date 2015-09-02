@@ -56,8 +56,8 @@ class _FalloutStatsForm(_StatsForm):
         if len(unicodeStr) > ctx.labelMaxLength:
             fullPlayerName = '{0}..'.format(normalized_unicode_trim(fullPlayerName, ctx.labelMaxLength - 2))
         fragsString = format % ' '
-        if vStatsVO.frags:
-            fragsString = format % str(vStatsVO.frags)
+        if vStatsVO.frags or viStatsVO.equipmentKills:
+            fragsString = format % str(vStatsVO.frags + viStatsVO.equipmentKills)
         pName = format % fullPlayerName
         frags = fragsString
         vName = format % vInfoVO.vehicleType.shortName
@@ -94,10 +94,10 @@ class _FalloutStatsForm(_StatsForm):
         return self._colorCache[color]
 
     def _findPlayerHTMLFormat(self, item, ctx, csManager):
-        if ctx.isPlayerSelected(item):
-            return self._getHTMLString('textColorGold', csManager)
-        elif ctx.isTeamKiller(item):
+        if ctx.isTeamKiller(item):
             return self._getHTMLString('teamkiller', csManager)
+        elif ctx.isPlayerSelected(item):
+            return self._getHTMLString('textColorGold', csManager)
         elif ctx.isSquadMan(item):
             return self._getHTMLString('textColorGold', csManager)
         else:

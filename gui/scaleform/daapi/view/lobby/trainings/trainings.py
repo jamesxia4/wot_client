@@ -33,6 +33,7 @@ class Trainings(LobbySubView, TrainingFormMeta, PrbListener):
         MusicController.g_musicController.play(MusicController.MUSIC_EVENT_LOBBY)
         MusicController.g_musicController.play(MusicController.AMBIENT_EVENT_LOBBY)
         self.addListener(events.TrainingSettingsEvent.UPDATE_TRAINING_SETTINGS, self.__createTrainingRoom, scope=EVENT_BUS_SCOPE.LOBBY)
+        self.sendData([], 0)
 
     def _dispose(self):
         self.stopPrbListening()
@@ -76,10 +77,11 @@ class Trainings(LobbySubView, TrainingFormMeta, PrbListener):
              'icon': formatters.getMapIconPath(arena, prefix='small/'),
              'disabled': not item.isOpened})
 
-        listLenStr = str(len(listData))
+        self.sendData(listData, playersTotal)
+
+    def sendData(self, listData, playersTotal):
         result = {'listData': listData,
-         'listTitle': text_styles.main(i18n.makeString(MENU.TRAINING_LISTTITLE)),
-         'roomsLabel': text_styles.main(i18n.makeString(MENU.TRAINING_ROOMSLABEL, roomsTotal=text_styles.stats(listLenStr))),
+         'roomsLabel': text_styles.main(i18n.makeString(MENU.TRAINING_ROOMSLABEL, roomsTotal=text_styles.stats(str(len(listData))))),
          'playersLabel': text_styles.main(i18n.makeString(MENU.TRAINING_PLAYERSLABEL, playersTotal=text_styles.stats(str(playersTotal))))}
         self.as_setListS(result)
 

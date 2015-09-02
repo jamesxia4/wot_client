@@ -43,7 +43,7 @@ class _BaseDumper(object):
                     status = i18n.makeString('#menu:currentVehicleStatus/rentalIsOver')
                 statusLevel = InventoryVehicle.STATE_LEVEL.CRITICAL
             elif not item.isPremiumIGR:
-                status = RentLeftFormatter(item.rentInfo).getRentTimeLeftStr()
+                status = RentLeftFormatter(item.rentInfo).getRentLeftStr()
                 statusLevel = InventoryVehicle.STATE_LEVEL.RENTED
         return (status, statusLevel)
 

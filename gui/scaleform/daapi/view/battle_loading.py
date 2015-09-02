@@ -2,6 +2,7 @@
 import BattleReplay
 import BigWorld
 import constants
+from debug_utils import LOG_ERROR
 from helpers import tips, i18n
 from gui.Scaleform.locale.FALLOUT import FALLOUT
 from gui.Scaleform.locale.RES_ICONS import RES_ICONS
@@ -129,7 +130,7 @@ class _BaseBattleLoading(LobbySubView, IArenaVehiclesController):
     def _setProgress(self, progress):
         pass
 
-    def _makeItem(self, vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, squadIdx):
+    def _makeItem(self, vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, squadIdx, isFallout = False):
         player = vInfoVO.player
         vTypeVO = vInfoVO.vehicleType
         dbID = player.accountDBID
@@ -157,7 +158,8 @@ class _BaseBattleLoading(LobbySubView, IArenaVehiclesController):
          'region': regionGetter(dbID),
          'vehicleType': vTypeVO.getClassName(),
          'teamColor': self.app.colorManager.getColorScheme(alias).get('aliasColor'),
-         'vLevel': vTypeVO.level}
+         'vLevel': vTypeVO.level,
+         'isFallout': isFallout}
 
     def _updateTipsInfo(self):
         pass
@@ -194,10 +196,12 @@ class BattleLoading(_BaseBattleLoading, BattleLoadingMeta):
         userGetter = self.usersStorage.getUser
         actionGetter = VehicleActions.getBitMask
         playerTeam = arenaDP.getNumberOfTeam()
+        arena = getClientArena()
+        isFallout = arena.guiType == constants.ARENA_GUI_TYPE.EVENT_BATTLES
         for isEnemy in (False, True):
             result = []
             for vInfoVO, _, viStatsVO in arenaDP.getVehiclesIterator(isEnemy):
-                result.append(self._makeItem(vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, self._getSquadIdx(arenaDP, vInfoVO)))
+                result.append(self._makeItem(vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, self._getSquadIdx(arenaDP, vInfoVO), isFallout))
 
             self._setVehiclesData(isEnemy, result)
 
@@ -238,15 +242,19 @@ class BattleLoading(_BaseBattleLoading, BattleLoadingMeta):
         if isFallout:
             self.as_setEventInfoPanelDataS({'bgUrl': bgUrl,
              'items': getHelpTextAsDicts(arena.arenaType)})
-        if not self.__isTipInited:
+        elif not self.__isTipInited:
             battlesCount = DEFAULT_BATTLES_COUNT
             if g_lobbyContext.getBattlesCount() is not None:
                 battlesCount = g_lobbyContext.getBattlesCount()
             vType, vLvl, nation = arenaDP.getVehicleInfo().getTypeInfo()
-            statusStr, tipStr, tipIcon = next(tips.getTipsIterator(arena.guiType, battlesCount, vType, nation, vLvl))
+            tipsIterator = tips.getTipsIterator(arena.guiType, battlesCount, vType, nation, vLvl)
+            statusStr, tipStr = ('', '')
+            if tipsIterator is not None:
+                statusStr, tipStr = next(tipsIterator)
+            else:
+                LOG_ERROR('No required tips found')
             self.as_setTipTitleS(text_styles.highTitle(statusStr))
-            self.as_setTipS(text_styles.main(tipStr))
-            self.as_setTipImageS(tipIcon)
+            self.as_setTipS(text_styles.playerOnline(tipStr))
             self.__isTipInited = True
 
     def _setArenaInfo(self, arenaInfoData):
@@ -272,7 +280,7 @@ class BattleLoading(_BaseBattleLoading, BattleLoadingMeta):
             hasBase = isBaseExists(arenaTypeID, team)
             allyTeamName, enemyTeamName = self._battleCtx.getTeamName(team), self._battleCtx.getTeamName(enemy)
             if arena.guiType == constants.ARENA_GUI_TYPE.EVENT_BATTLES:
-                winText = i18n.makeString('#arenas:type/fallout/description')
+                winText = i18n.makeString('#arenas:type/%s/description' % arenaSubType)
             else:
                 winText = getBattleSubTypeWinText(arenaTypeID, 1 if hasBase else 2)
             if descExtra:
@@ -337,10 +345,8 @@ class FalloutMultiTeamBattleLoading(_BaseBattleLoading, FalloutMultiTeamLoadingM
     def _setProgress(self, progress):
         self.as_setProgressS(progress)
 
-    def _makeItem(self, vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, squadIdx):
-        result = super(FalloutMultiTeamBattleLoading, self)._makeItem(vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, squadIdx)
-        if not isEnemy:
-            result['playerName'] = text_styles.gold(result['playerName'])
+    def _makeItem(self, vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, squadIdx, isFallout = True):
+        result = super(FalloutMultiTeamBattleLoading, self)._makeItem(vInfoVO, viStatsVO, userGetter, isSpeaking, actionGetter, regionGetter, playerTeam, isEnemy, squadIdx, isFallout)
         result['points'] = viStatsVO.winPoints
         return result
 

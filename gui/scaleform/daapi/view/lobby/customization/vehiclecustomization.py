@@ -26,7 +26,6 @@ from helpers import i18n
 from shared_utils import findFirst
 from items import vehicles
 from items.vehicles import VehicleDescr
-from gui.doc_loaders.hints_layout import getLayout
 from account_helpers.settings_core.settings_constants import TUTORIAL
 
 class VehicleCustomization(VehicleCustomizationMeta, View):
@@ -283,6 +282,8 @@ class VehicleCustomization(VehicleCustomizationMeta, View):
         self.__isIgrChanged = True
 
     def __cv_onChanged(self, *args):
+        if self.__steps:
+            return
         if not g_currentVehicle.isReadyToFight() and not g_currentVehicle.isReadyToPrebattle():
             if g_currentVehicle.isCrewFull() and not g_currentVehicle.isBroken():
                 self.closeWindow()

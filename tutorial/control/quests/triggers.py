@@ -284,35 +284,6 @@ class XpExchangeTrigger(Trigger):
         self.isRunning = False
 
 
-class PremiumDiscountUseTrigger(Trigger):
-
-    def __init__(self, triggerID):
-        super(PremiumDiscountUseTrigger, self).__init__(triggerID)
-
-    def run(self):
-        self.isRunning = True
-        if not self.isSubscribed:
-            self.isSubscribed = True
-            g_clientUpdateManager.addCallbacks({'goodies': self.__onDiscountsChange})
-        self._premiumDiscounts = g_itemsCache.items.shop.personalPremiumPacketsDiscounts
-        self.toggle(isOn=self.isOn())
-
-    def isOn(self):
-        newDiscounts = g_itemsCache.items.shop.personalPremiumPacketsDiscounts
-        result = len(newDiscounts) < len(self._premiumDiscounts)
-        self._premiumDiscounts = newDiscounts
-        return result
-
-    def clear(self):
-        g_clientUpdateManager.removeObjectCallbacks(self)
-        self.isSubscribed = False
-        self.isRunning = False
-        self._premiumDiscounts = None
-
-    def __onDiscountsChange(self, *args):
-        self.toggle(isOn=self.isOn())
-
-
 class InstallItemsTrigger(TriggerWithValidateVar):
 
     def run(self):

@@ -189,7 +189,7 @@ class BoostersWindow(BoostersWindowMeta):
 
     def __getBoosterQuests(self):
         result = defaultdict(list)
-        quests = g_eventsCache.getQuests(lambda q: not q.isCompleted())
+        quests = g_eventsCache.getQuests(lambda q: q.isAvailable()[0] and not q.isCompleted())
         for q in quests.itervalues():
             bonuses = q.getBonuses('goodies')
             for b in bonuses:

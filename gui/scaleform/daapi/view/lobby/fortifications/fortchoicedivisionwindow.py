@@ -1,16 +1,12 @@
 #Embedded file name: scripts/client/gui/Scaleform/daapi/view/lobby/fortifications/FortChoiceDivisionWindow.py
-import BigWorld
 from helpers import i18n
 from UnitBase import SORTIE_DIVISION
 from constants import PREBATTLE_TYPE
 from adisp import process
-from gui import SystemMessages
 from gui.Scaleform.daapi.view.lobby.fortifications.components.sorties_dps import makeDivisionData
-from gui.prb_control.items.sortie_items import getDivisionNameByDivisionId
 from gui.Scaleform.daapi.view.lobby.fortifications.fort_utils import fort_formatters
 from gui.Scaleform.daapi.view.meta.FortChoiceDivisionWindowMeta import FortChoiceDivisionWindowMeta
 from gui.Scaleform.locale.FORTIFICATIONS import FORTIFICATIONS as I18N_FORTIFICATIONS
-from gui.Scaleform.locale.SYSTEM_MESSAGES import SYSTEM_MESSAGES as I18N_SYSTEM_MESSAGES
 from gui.prb_control.prb_helpers import prbDispatcherProperty
 from gui.prb_control.items.unit_items import SupportedRosterSettings
 from gui.shared.event_bus import EVENT_BUS_SCOPE
@@ -34,10 +30,7 @@ class FortChoiceDivisionWindow(FortChoiceDivisionWindowMeta):
 
     @process
     def sendRequest(self, request):
-        result = yield self.prbDispatcher.sendUnitRequest(request)
-        if result:
-            devisionName = i18n.makeString(I18N_SYSTEM_MESSAGES.changedivision_request_divisiontype(getDivisionNameByDivisionId(self.__divisionID)))
-            SystemMessages.pushI18nMessage('#system_messages:changeDivision/request/changeDivision', type=SystemMessages.SM_TYPE.Information, name=BigWorld.player().name, division=devisionName)
+        yield self.prbDispatcher.sendUnitRequest(request)
 
     def selectedDivision(self, divisionID):
         if self.__divisionID is None:

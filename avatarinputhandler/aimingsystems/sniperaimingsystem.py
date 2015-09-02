@@ -121,7 +121,7 @@ class SniperAimingSystem(IAimingSystem):
         self.__idealYaw, self.__idealPitch = self.__worldYawPitchToTurret(self.__g_curYaw, self.__g_curPitch)
         self.__idealYaw, self.__idealPitch = self.__clampToLimits(self.__idealYaw, self.__idealPitch)
         self.__oscillator.reset()
-        self.__pitchfilter.reset(self.__g_curPitch)
+        self.__pitchfilter.reset(currentGunMat.pitch)
         SniperAimingSystem.__activeSystem = self
 
     def disable(self):
@@ -183,14 +183,13 @@ class SniperAimingSystem(IAimingSystem):
                 g_newPitch = self.__g_curPitch + self.__dInputPitch
                 l_newYaw, l_newPitch = self.__worldYawPitchToTurret(self.__g_curYaw, g_newPitch)
                 if self.__dInputYaw != 0.0:
-                    self.__idealYaw, lLimPitch = self.__clampToLimits(l_newYaw, l_newPitch, True)
+                    self.__idealYaw, l_limPitch = self.__clampToLimits(l_newYaw, l_newPitch, True)
                     l_curYaw = self.__idealYaw
-                    if not self.__pitchfilter.active():
-                        self.__dInputPitch += lLimPitch - l_newPitch
+                    if math.fabs(l_limPitch - l_newPitch) > 1e-05:
+                        self.__dInputPitch = l_limPitch - l_curPitch
                         g_newPitch = self.__g_curPitch + self.__dInputPitch
-                        l_newPitch = lLimPitch
-                    else:
-                        self.__idealPitch = lLimPitch
+                        l_newPitch = l_limPitch
+                    self.__idealPitch = l_limPitch
                 if self.__dInputPitch != 0.0:
                     inLimit, limPitch = self.__inLimit(self.__idealYaw, l_newPitch, True)
                     if not wasInLimit and not inLimit and math.fabs(l_newPitch) >= math.fabs(l_curPitch):

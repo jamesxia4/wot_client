@@ -888,6 +888,12 @@ class ClubsQuest(Quest):
     def getSeasonID(self):
         return self.__seasonID
 
+    def getUserName(self):
+        return i18n.makeString(Quest.getUserName(self))
+
+    def getDescription(self):
+        return i18n.makeString(Quest.getDescription(self))
+
 
 class CompanyBattles(namedtuple('CompanyBattles', ['startTime', 'finishTime', 'peripheryIDs'])):
     DELTA = 1
@@ -917,7 +923,7 @@ class CompanyBattles(namedtuple('CompanyBattles', ['startTime', 'finishTime', 'p
         return destroyingTime > 0 or destroyingTime is None
 
     def needToChangePeriphery(self):
-        return not connectionManager.isStandalone() and self.peripheryIDs and connectionManager.peripheryID not in self.peripheryIDs
+        return not connectionManager.isStandalone() and connectionManager.peripheryID not in self.peripheryIDs
 
     def isValid(self):
         return (self.startTime is None or self.startTime > 0) and (self.finishTime is None or self.finishTime > 0) and (connectionManager.isStandalone() or self.__validatePeripheryIDs())
@@ -926,7 +932,7 @@ class CompanyBattles(namedtuple('CompanyBattles', ['startTime', 'finishTime', 'p
         return self.isValid() and self.isCreationTimeCorrect() and self.isDestroyingTimeCorrect()
 
     def __validatePeripheryIDs(self):
-        validPeripheryIDs = set((host.peripheryID for host in g_preDefinedHosts.hosts()))
+        validPeripheryIDs = set((host.peripheryID for host in g_preDefinedHosts.hosts() if host.peripheryID != 0))
         return self.peripheryIDs <= validPeripheryIDs
 
 

@@ -2,7 +2,7 @@
 import types
 from helpers import i18n
 from gui import makeHtmlString
-__all__ = ('standard', 'main', 'neutral', 'stats', 'statInfo', 'middleTitle', 'highTitle', 'disabled', 'promoTitle', 'promoSubTitle', 'alert', 'success', 'error', 'warning', 'critical', 'expText', 'gold', 'credits', 'defRes', 'counter', 'titleFont', 'tutorial', 'getRawStyles', 'getStyles', 'concatStylesToSingleLine', 'concatStylesToMultiLine')
+__all__ = ('standard', 'main', 'neutral', 'stats', 'statInfo', 'middleTitle', 'highTitle', 'disabled', 'promoTitle', 'promoSubTitle', 'alert', 'success', 'error', 'warning', 'critical', 'expText', 'gold', 'credits', 'defRes', 'counter', 'titleFont', 'tutorial', 'playerOnline', 'getRawStyles', 'getStyles', 'concatStylesToSingleLine', 'concatStylesToMultiLine')
 
 def _getStyle(style, ctx = None):
     if ctx is None:
@@ -102,6 +102,10 @@ def titleFont(text):
 
 def tutorial(text):
     return _formatText('tutorialText', text)
+
+
+def playerOnline(text):
+    return _formatText('playerOnline', text)
 
 
 def getRawStyles(names):

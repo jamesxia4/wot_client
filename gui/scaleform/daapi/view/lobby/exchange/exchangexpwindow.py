@@ -75,7 +75,8 @@ class ExchangeXPWindow(ExchangeXpWindowMeta):
          'vehicleList': values,
          'tableHeader': self._getTableHeader(),
          'xpForFree': self.__xpForFree,
-         'rateLabel': labelBuilder.render()}
+         'rateLabel': labelBuilder.render(),
+         'xpAction': g_itemsCache.items.shop.isXPConversionActionActive}
         self.as_vehiclesDataChangedS(vehicleData)
 
     def _getTableHeader(self):

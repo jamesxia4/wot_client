@@ -492,6 +492,9 @@ class SquadActionValidator(_UnitActionValidator):
     def _validateLevels(self, stats, flags):
         return (True, UNIT_RESTRICTION.UNDEFINED)
 
+    def _validateSlots(self, stats, flags, slots):
+        return (True, UNIT_RESTRICTION.UNDEFINED)
+
 
 class FalloutSquadActionValidator(SquadActionValidator):
 

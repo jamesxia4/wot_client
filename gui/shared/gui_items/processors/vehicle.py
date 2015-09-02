@@ -16,7 +16,7 @@ from gui.shared.gui_items.processors import ItemProcessor, Processor, makeI18nSu
 def getCrewAndShellsSumPrice(result, vehicle, crewType, buyShells):
     if crewType != -1:
         tankmenCount = len(vehicle.crew)
-        tankmanCost = g_itemsCache.items.shop.tankmanCost[crewType]
+        tankmanCost = g_itemsCache.items.shop.tankmanCostWithGoodyDiscount[crewType]
         result[0] += tankmanCost['credits'] * tankmenCount
         result[1] += tankmanCost['gold'] * tankmenCount
     if buyShells:

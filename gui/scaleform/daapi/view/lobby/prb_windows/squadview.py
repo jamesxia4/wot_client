@@ -87,16 +87,27 @@ class SquadView(SquadViewMeta):
 
     def onUnitExtraChanged(self, extra):
         super(SquadView, self).onUnitExtraChanged(extra)
+        self.__updateFalloutState()
         self._updateRallyData()
         self._setActionButtonState()
+        self.__updateHeader()
+
+    def onUnitRejoin(self):
+        self.__updateFalloutState()
+        super(SquadView, self).onUnitRejoin()
+        self.__updateHeader()
+
+    def getCoolDownRequests(self):
+        requests = super(SquadView, self).getCoolDownRequests()
+        requests.append(REQUEST_TYPE.SET_ES_PLAYER_STATE)
+        return requests
 
     def _populate(self):
         self.__updateFalloutState()
+        self.as_isFalloutS(self.__isFallout)
         super(SquadView, self)._populate()
         self.addListener(events.CoolDownEvent.PREBATTLE, self.__handleSetPrebattleCoolDown, scope=EVENT_BUS_SCOPE.LOBBY)
-        if self.__isFallout:
-            vehicleLbl = text_styles.standard(i18n.makeString(CYBERSPORT.WINDOW_UNIT_TEAMVEHICLESLBL, levelsRange=toRomanRangeString(list(self.__falloutCfg.allowedLevels), 1)))
-            self.as_setVehiclesTitleS(vehicleLbl)
+        self.__updateHeader()
 
     def _dispose(self):
         self.__falloutCfg = None
@@ -147,4 +158,8 @@ class SquadView(SquadViewMeta):
         self.__falloutType = self.unitFunctional.getExtra().eventType
         self.__isFallout = self.__falloutType > 0
         self.__falloutCfg = g_eventsCache.getFalloutConfig(self.__falloutType)
-        self.as_isFalloutS(self.__isFallout)
+
+    def __updateHeader(self):
+        if self.__isFallout:
+            vehicleLbl = text_styles.standard(i18n.makeString(CYBERSPORT.WINDOW_UNIT_TEAMVEHICLESLBL, levelsRange=toRomanRangeString(list(self.__falloutCfg.allowedLevels), 1)))
+            self.as_setVehiclesTitleS(vehicleLbl)

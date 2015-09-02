@@ -707,6 +707,7 @@ class UnitFunctional(_UnitFunctional):
                 listener.onUnitFlagsChanged(flags, timeLeftInIdle)
 
         unit_ext.destroyListReq()
+        g_eventDispatcher.loadHangar()
         g_eventDispatcher.updateUI()
         self._scheduler.init()
         return initResult | FUNCTIONAL_INIT_RESULT.INITED | FUNCTIONAL_INIT_RESULT.LOAD_WINDOW
@@ -1345,7 +1346,7 @@ class UnitFunctional(_UnitFunctional):
             listener.onUnitFlagsChanged(flags, timeLeftInIdle)
 
         if not flags.isOnlyRosterWaitChanged():
-            self._actionHandler.setUnitChanged()
+            self._actionHandler.setUnitChanged(flags)
         members = unit.getMembers()
         diff = []
         for slotIdx in self._rosterSettings.getAllSlotsRange():

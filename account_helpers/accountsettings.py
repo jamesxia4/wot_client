@@ -1,11 +1,11 @@
 #Embedded file name: scripts/client/account_helpers/AccountSettings.py
 import base64
 import copy
+import cPickle as pickle
 import constants
 import BigWorld
 import Settings
 import Event
-import cPickle as pickle
 from constants import FORT_BUILDING_TYPE as _FBT
 from account_helpers import gameplay_ctx
 from debug_utils import LOG_CURRENT_EXCEPTION
@@ -218,7 +218,10 @@ DEFAULT_VALUES = {KEY_FILTERS: {'shop_current': (-1, 'vehicle'),
                 'checkBoxConfirmator': {'questsConfirmDialogShow': True},
                 'customization': {},
                 'showVehModelsOnMap': 0,
-                'interfaceScale': 0}}
+                'interfaceScale': 0,
+                'medKitInstalled': False,
+                'repairKitInstalled': False,
+                'fireExtinguisherInstalled': False}}
 
 def _filterAccountSection(dataSec):
     for key, section in dataSec.items()[:]:

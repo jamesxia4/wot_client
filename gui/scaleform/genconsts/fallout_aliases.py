@@ -4,5 +4,3 @@
 class FALLOUT_ALIASES(object):
     FALLOUT_BATTLE_SELECTOR_WINDOW = 'falloutBattleSelectorWindow'
     FALLOUT_BATTLE_SELECTOR_WINDOW_SWF = 'falloutBattleSelectorWindow.swf'
-    TOOLTIP_DATA_DOMINATION = 'tooltipDataDomination'
-    TOOLTIP_DATA_MULITEAM = 'tooltipDataMuliteam'

@@ -294,8 +294,14 @@ def _getSlotsData(unitIdx, unit, unitState, pInfo, slotsIter, app = None, levels
                 dbID = player.dbID
                 isCurrentPlayer = player.isCurrentPlayer()
                 if isCurrentPlayer:
-                    statusTemplate = i18n.makeString(MESSENGER.DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFY, level=text_styles.main(toRomanRangeString(list(falloutCfg.allowedLevels), 1)))
-                    vehiclesNotify[0] = [i18n.makeString(MESSENGER.DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFY, level=text_styles.main(int2roman(falloutCfg.vehicleLevelRequired)))]
+                    if falloutBattleType == FALLOUT_BATTLE_TYPE.MULTITEAM:
+                        vehiclesNotify[0] = [i18n.makeString(MESSENGER.DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFYMULTITEAM)]
+                    else:
+                        vehiclesNotify[0] = [i18n.makeString(MESSENGER.DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFY, level=text_styles.main(int2roman(falloutCfg.vehicleLevelRequired)))]
+                    if len(falloutCfg.allowedLevels) > 1:
+                        statusTemplate = i18n.makeString(MESSENGER.DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFYRANGE, level=text_styles.main(toRomanRangeString(list(falloutCfg.allowedLevels), 1)))
+                    else:
+                        statusTemplate = i18n.makeString(MESSENGER.DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFYMULTITEAM)
                     for slotIdx in range(1, falloutCfg.minVehiclesPerPlayer):
                         vehiclesNotify[slotIdx] = statusTemplate
 

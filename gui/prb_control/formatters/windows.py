@@ -44,12 +44,8 @@ class SwitchPeripheryCompanyCtx(SwitchPeripheryCtx):
         return [actions.ShowCompanyWindow()]
 
     def getForbiddenPeripherieIDs(self):
-        hostsSet = set((x[3] for x in g_preDefinedHosts.getSimpleHostsList(g_preDefinedHosts.hostsWithRoaming())))
-        for peripheryID in g_eventsCache.getCompanyBattles().peripheryIDs:
-            if peripheryID in hostsSet:
-                hostsSet.remove(peripheryID)
-
-        return hostsSet
+        validPeripheryIDs = set((host.peripheryID for host in g_preDefinedHosts.hosts() if host.peripheryID != 0))
+        return validPeripheryIDs - g_eventsCache.getCompanyBattles().peripheryIDs
 
 
 class SwitchPeripheryFortCtx(SwitchPeripheryCtx):

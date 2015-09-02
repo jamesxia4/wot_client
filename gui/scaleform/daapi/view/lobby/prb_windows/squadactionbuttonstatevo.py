@@ -31,7 +31,10 @@ class SquadActionButtonStateVO(ActionButtonStateVO):
 
     def _getFalloutVehLevelStr(self):
         config = g_eventsCache.getFalloutConfig(self._extra.eventType)
-        return ('#cyberSport:window/unit/message/falloutLevel', {'level': int2roman(config.vehicleLevelRequired)})
+        if len(config.allowedLevels) > 1:
+            return ('#cyberSport:window/unit/message/falloutMin', {'level': toRomanRangeString(list(config.allowedLevels), 1)})
+        else:
+            return ('#cyberSport:window/unit/message/falloutLevel', {'level': int2roman(config.vehicleLevelRequired)})
 
     def _getFalloutVehMinStr(self):
         config = g_eventsCache.getFalloutConfig(self._extra.eventType)

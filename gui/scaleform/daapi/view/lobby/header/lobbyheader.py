@@ -210,8 +210,8 @@ class LobbyHeader(LobbyHeaderMeta, GlobalListener, ClanEmblemsHelper):
         self.as_goldResponseS(BigWorld.wg_getGoldFormat(gold), MENU.HEADERBUTTONS_BTNLABEL_BUY_GOLD, TOOLTIPS.HEADER_REFILL, TOOLTIP_TYPES.COMPLEX)
 
     def __setFreeXP(self, freeXP):
-        isHasAction = False
-        self.as_setFreeXPS(BigWorld.wg_getIntegralFormat(freeXP), MENU.HEADERBUTTONS_BTNLABEL_GATHERING_EXPERIENCE, isHasAction, TOOLTIPS.HEADER_XP_GATHERING, TOOLTIP_TYPES.COMPLEX)
+        isActionActive = g_itemsCache.items.shop.isXPConversionActionActive
+        self.as_setFreeXPS(BigWorld.wg_getIntegralFormat(freeXP), MENU.HEADERBUTTONS_BTNLABEL_GATHERING_EXPERIENCE, isActionActive, TOOLTIPS.HEADER_XP_GATHERING, TOOLTIP_TYPES.COMPLEX)
 
     def __setAccountsAttrs(self, isPremiumAccount, premiumExpiryTime = 0):
         disableTTHeader = ''
@@ -259,7 +259,7 @@ class LobbyHeader(LobbyHeaderMeta, GlobalListener, ClanEmblemsHelper):
 
     def __onWalletChanged(self, status):
         self.as_goldResponseS(BigWorld.wg_getGoldFormat(g_itemsCache.items.stats.actualGold), MENU.HEADERBUTTONS_BTNLABEL_BUY_GOLD, TOOLTIPS.HEADER_REFILL, TOOLTIP_TYPES.COMPLEX)
-        self.as_setFreeXPS(BigWorld.wg_getIntegralFormat(g_itemsCache.items.stats.actualFreeXP), MENU.HEADERBUTTONS_BTNLABEL_GATHERING_EXPERIENCE, TOOLTIPS.HEADER_XP_GATHERING, TOOLTIP_TYPES.COMPLEX, g_itemsCache.items.shop.isXPConversionActionActive)
+        self.as_setFreeXPS(BigWorld.wg_getIntegralFormat(g_itemsCache.items.stats.actualFreeXP), MENU.HEADERBUTTONS_BTNLABEL_GATHERING_EXPERIENCE, g_itemsCache.items.shop.isXPConversionActionActive, TOOLTIPS.HEADER_XP_GATHERING, TOOLTIP_TYPES.COMPLEX)
         self.as_setWalletStatusS(status)
 
     def __onPremiumTimeChanged(self, isPremium, _, premiumExpiryTime):

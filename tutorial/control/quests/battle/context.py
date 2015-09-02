@@ -1,5 +1,5 @@
 #Embedded file name: scripts/client/tutorial/control/quests/battle/context.py
-from account_helpers.settings_core.SettingsCore import g_settingsCore
+from account_helpers.AccountSettings import AccountSettings
 from account_helpers.settings_core.settings_constants import TUTORIAL
 from constants import ARENA_GUI_TYPE, IS_DEVELOPMENT
 from gui.battle_control import arena_info
@@ -16,9 +16,9 @@ class BattleQuestsStartReqs(context.StartReqs):
 
     def __areSettingsInited(self):
         validateSettings = (TUTORIAL.FIRE_EXTINGUISHER_INSTALLED, TUTORIAL.MEDKIT_INSTALLED, TUTORIAL.REPAIRKIT_INSTALLED)
-        getter = g_settingsCore.serverSettings.getTutorialSetting
+        getter = AccountSettings.getSettings
         for setting in validateSettings:
-            if getter(setting, False):
+            if getter(setting):
                 return True
 
         return False

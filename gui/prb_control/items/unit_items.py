@@ -201,12 +201,16 @@ class FalloutVehiclesInfo(object):
         return result
 
     def updateInventory(self, vehInvCDs):
+        if not self.vehTypeCDs:
+            return None
         vehsList = list(self.vehInvIDs)
+        isChanged = False
         for i, vCD in enumerate(self.vehTypeCDs):
-            if vCD not in vehInvCDs:
+            if vCD != INV_ID_CLEAR_VEHICLE and vCD not in vehInvCDs:
                 vehsList[i] = INV_ID_CLEAR_VEHICLE
+                isChanged = True
 
-        if vehsList != self.vehInvIDs:
+        if isChanged:
             return unit_ctx.SetEventVehiclesCtx(vehsList, waitingID='prebattle/change_settings')
 
     def getVehicles(self):
@@ -274,6 +278,9 @@ class UnitFlags(object):
 
     def isInQueue(self):
         return self.__flags & UNIT_FLAGS.IN_QUEUE > 0 or self.__flags & UNIT_FLAGS.PRE_QUEUE > 0
+
+    def isInQueueChanged(self):
+        return self.__flagsDiff & UNIT_FLAGS.IN_QUEUE > 0 or self.__flagsDiff & UNIT_FLAGS.PRE_QUEUE > 0
 
     def isInIdle(self):
         return self.__flags & UNIT_FLAGS.MODAL_STATES > 0

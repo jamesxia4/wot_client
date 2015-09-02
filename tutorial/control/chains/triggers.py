@@ -34,10 +34,7 @@ class SimpleDialogTrigger(Trigger):
 class BuyNextLevelVehicleTrigger(TriggerWithSubscription):
 
     def isOn(self):
-        vehicle = game_vars.getVehicleByIntCD(self.getVar())
-        if vehicle is None:
-            return False
-        return len(game_vars.getVehiclesByLevel(vehicle.level + 1)) > 0
+        return len(game_vars.getVehiclesByLevel(self.getVar() + 1)) > 0
 
     def _subscribe(self):
         g_clientUpdateManager.addCallbacks({'inventory': self.__onInventoryUpdated})

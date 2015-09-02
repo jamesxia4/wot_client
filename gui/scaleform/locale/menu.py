@@ -500,6 +500,8 @@ class MENU(object):
     HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTONLY_BODY = '#menu:headerButtons/fightBtn/tooltip/falloutOnly/body'
     HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTNOTSELECTED_HEADER = '#menu:headerButtons/fightBtn/tooltip/falloutNotSelected/header'
     HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTNOTSELECTED_BODY = '#menu:headerButtons/fightBtn/tooltip/falloutNotSelected/body'
+    HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTNOTREADY_HEADER = '#menu:headerButtons/fightBtn/tooltip/falloutNotReady/header'
+    HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTNOTREADY_BODY = '#menu:headerButtons/fightBtn/tooltip/falloutNotReady/body'
     HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTNOTENOUGHPLAYER_HEADER = '#menu:headerButtons/fightBtn/tooltip/falloutNotEnoughPlayer/header'
     HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTNOTENOUGHPLAYER_BODY = '#menu:headerButtons/fightBtn/tooltip/falloutNotEnoughPlayer/body'
     HEADERBUTTONS_FIGHTBTN_TOOLTIP_FALLOUTVEHLEVELREQUIRED_HEADER = '#menu:headerButtons/fightBtn/tooltip/falloutVehLevelRequired/header'
@@ -1838,16 +1840,16 @@ class MENU(object):
      TANKCAROUSEL_VEHICLESTATES_BUYSLOT,
      TANKCAROUSEL_VEHICLESTATES_UNAVAILABLE,
      TANKCAROUSEL_VEHICLESTATES_FALLOUT_ONLY)
-    SHOP_TABLE_HEADER_COUNT_ENUM = (SHOP_TABLE_HEADER_COUNT_VEHICLE,
-     SHOP_TABLE_HEADER_COUNT_MODULE,
-     SHOP_TABLE_HEADER_COUNT_SHELL,
-     SHOP_TABLE_HEADER_COUNT_OPTIONALDEVICE,
-     SHOP_TABLE_HEADER_COUNT_EQUIPMENT)
     FINALSTATISTIC_COMMONSTATS_RESULTLABEL_ENUM = (FINALSTATISTIC_COMMONSTATS_RESULTLABEL_WIN,
      FINALSTATISTIC_COMMONSTATS_RESULTLABEL_LOSE,
      FINALSTATISTIC_COMMONSTATS_RESULTLABEL_TIE,
      FINALSTATISTIC_COMMONSTATS_RESULTLABEL_TECHWIN,
      FINALSTATISTIC_COMMONSTATS_RESULTLABEL_ENDED)
+    SHOP_TABLE_HEADER_COUNT_ENUM = (SHOP_TABLE_HEADER_COUNT_VEHICLE,
+     SHOP_TABLE_HEADER_COUNT_MODULE,
+     SHOP_TABLE_HEADER_COUNT_SHELL,
+     SHOP_TABLE_HEADER_COUNT_OPTIONALDEVICE,
+     SHOP_TABLE_HEADER_COUNT_EQUIPMENT)
     TANKMEN_ENUM = (TANKMEN_LIGHTTANK,
      TANKMEN_MEDIUMTANK,
      TANKMEN_HEAVYTANK,
@@ -1856,10 +1858,6 @@ class MENU(object):
      TANKMEN_LOCKREASON_INBATTLE,
      TANKMEN_LOCKREASON_PREBATTLE,
      TANKMEN_LOCKREASON_BROKEN)
-    PROFILE_STATS_BLOCKS_ENUM = (PROFILE_STATS_BLOCKS_COMMON,
-     PROFILE_STATS_BLOCKS_BATTLEEFFECT,
-     PROFILE_STATS_BLOCKS_CREDITS,
-     PROFILE_STATS_BLOCKS_STUDYING)
     LOADING_BATTLETYPES_DESC_ENUM = (LOADING_BATTLETYPES_DESC_0,
      LOADING_BATTLETYPES_DESC_1,
      LOADING_BATTLETYPES_DESC_2,
@@ -1873,6 +1871,10 @@ class MENU(object):
      LOADING_BATTLETYPES_DESC_8,
      LOADING_BATTLETYPES_DESC_9,
      LOADING_BATTLETYPES_DESC_10)
+    PROFILE_STATS_BLOCKS_ENUM = (PROFILE_STATS_BLOCKS_COMMON,
+     PROFILE_STATS_BLOCKS_BATTLEEFFECT,
+     PROFILE_STATS_BLOCKS_CREDITS,
+     PROFILE_STATS_BLOCKS_STUDYING)
     VEHICLEINFO_PARAMS_ENUM = (VEHICLEINFO_PARAMS_MAXHEALTH,
      VEHICLEINFO_PARAMS_WEIGHT,
      VEHICLEINFO_PARAMS_ENGINEPOWER,
@@ -2176,16 +2178,16 @@ class MENU(object):
         return outcome
 
     @staticmethod
-    def shop_table_header_count(key):
-        outcome = '#menu:shop/table/header/count/%s' % key
-        if outcome not in MENU.SHOP_TABLE_HEADER_COUNT_ENUM:
+    def finalstatistic_commonstats_resultlabel(key):
+        outcome = '#menu:finalStatistic/commonStats/resultlabel/%s' % key
+        if outcome not in MENU.FINALSTATISTIC_COMMONSTATS_RESULTLABEL_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 
     @staticmethod
-    def finalstatistic_commonstats_resultlabel(key):
-        outcome = '#menu:finalStatistic/commonStats/resultlabel/%s' % key
-        if outcome not in MENU.FINALSTATISTIC_COMMONSTATS_RESULTLABEL_ENUM:
+    def shop_table_header_count(key):
+        outcome = '#menu:shop/table/header/count/%s' % key
+        if outcome not in MENU.SHOP_TABLE_HEADER_COUNT_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 
@@ -2197,16 +2199,16 @@ class MENU(object):
         return outcome
 
     @staticmethod
-    def profile_stats_blocks(key):
-        outcome = '#menu:profile/stats/blocks/%s' % key
-        if outcome not in MENU.PROFILE_STATS_BLOCKS_ENUM:
+    def loading_battletypes_desc(key):
+        outcome = '#menu:loading/battleTypes/desc/%s' % key
+        if outcome not in MENU.LOADING_BATTLETYPES_DESC_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 
     @staticmethod
-    def loading_battletypes_desc(key):
-        outcome = '#menu:loading/battleTypes/desc/%s' % key
-        if outcome not in MENU.LOADING_BATTLETYPES_DESC_ENUM:
+    def profile_stats_blocks(key):
+        outcome = '#menu:profile/stats/blocks/%s' % key
+        if outcome not in MENU.PROFILE_STATS_BLOCKS_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 

@@ -13,6 +13,7 @@ from gui.Scaleform.genConsts.CYBER_SPORT_ALIASES import CYBER_SPORT_ALIASES
 from gui.Scaleform.managers.windows_stored_data import stored_window, DATA_TYPE, TARGET_ID
 from gui.Scaleform.daapi.view.meta.FortBattleRoomWindowMeta import FortBattleRoomWindowMeta
 from gui.Scaleform.genConsts.FORTIFICATION_ALIASES import FORTIFICATION_ALIASES
+from gui.Scaleform.locale.SYSTEM_MESSAGES import SYSTEM_MESSAGES as I18N_SYSTEM_MESSAGES
 from gui.prb_control import settings
 from gui.prb_control.events_dispatcher import g_eventDispatcher
 from gui.prb_control.context import unit_ctx
@@ -26,6 +27,10 @@ from gui.shared.events import FortEvent
 from gui.shared import events
 from gui.shared.fortifications.context import CreateSortieCtx, CreateOrJoinFortBattleCtx
 from gui.shared.fortifications.fort_helpers import fortProviderProperty, FortListener
+from gui.prb_control.items.sortie_items import getDivisionNameByUnit
+from gui.shared.utils import getPlayerDatabaseID
+from helpers import i18n
+from messenger.storage import storage_getter
 
 @stored_window(DATA_TYPE.UNIQUE_WINDOW, TARGET_ID.CHANNEL_CAROUSEL)
 
@@ -170,6 +175,21 @@ class FortBattleRoomWindow(FortBattleRoomWindowMeta, FortListener):
     def onUnitRejoin(self):
         self.__clearState()
         self.__clearCache()
+
+    def onUnitRosterChanged(self):
+        super(FortBattleRoomWindow, self).onUnitRosterChanged()
+        chat = self.chat
+        if chat:
+            _, unit = self.unitFunctional.getUnit()
+            commanderID = unit.getCommanderDBID()
+            if commanderID != getPlayerDatabaseID():
+                getter = storage_getter('users')
+                commander = getter().getUser(commanderID)
+                division = getDivisionNameByUnit(unit)
+                divisionName = i18n.makeString(I18N_SYSTEM_MESSAGES.unit_notification_divisiontype(division))
+                key = I18N_SYSTEM_MESSAGES.UNIT_NOTIFICATION_CHANGEDIVISION
+                txt = i18n.makeString(key, name=commander.getName(), division=divisionName)
+                chat.addNotification(txt)
 
     def onIntroUnitFunctionalFinished(self):
         if self.unitFunctional.getExit() != settings.FUNCTIONAL_EXIT.UNIT:

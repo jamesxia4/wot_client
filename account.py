@@ -454,11 +454,11 @@ class PlayerAccount(BigWorld.Entity, ClientChat):
         events.onAccountShowGUI(ctx)
         BigWorld.Screener.setUserId(self.databaseID)
 
-    def receiveQueueInfo(self, randomsQueueInfo, companiesQueueInfo, historicalQueueInfo):
+    def receiveQueueInfo(self, randomsQueueInfo, companiesQueueInfo, historicalQueueInfo, eventQueueInfo):
         unpacked = None
         if historicalQueueInfo is not None:
             unpacked = self.__unpackHistoricalQueueInfo(historicalQueueInfo)
-        events.onQueueInfoReceived(randomsQueueInfo, companiesQueueInfo, unpacked)
+        events.onQueueInfoReceived(randomsQueueInfo, companiesQueueInfo, unpacked, eventQueueInfo)
 
     def __unpackHistoricalQueueInfo(self, historicalQueueInfo):
         unpacked = {}

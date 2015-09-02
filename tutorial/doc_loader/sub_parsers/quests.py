@@ -60,13 +60,14 @@ def _readTimerTriggerSection(xmlCtx, section, _, triggerID):
     return sub_parsers.readValidateVarTriggerSection(xmlCtx, section, triggerID, triggers.TimerTrigger)
 
 
-def _readPremiumDiscountTriggerSection(xmlCtx, section, _, triggerID):
-    return triggers.PremiumDiscountUseTrigger(triggerID)
-
-
 def readSaveTutorialSettingSection(xmlCtx, section, _, conditions):
     settingID = sub_parsers.parseID(xmlCtx, section, 'Specify a setting ID')
     return effects.HasTargetEffect(settingID, _EFFECT_TYPE.SAVE_TUTORIAL_SETTING, conditions=conditions)
+
+
+def readSaveAccountSettingSection(xmlCtx, section, _, conditions):
+    settingID = sub_parsers.parseID(xmlCtx, section, 'Specify a setting ID')
+    return effects.HasTargetEffect(settingID, _EFFECT_TYPE.SAVE_ACCOUNT_SETTING, conditions=conditions)
 
 
 def readTutorialSettingSection(xmlCtx, section, flags):
@@ -96,10 +97,12 @@ def readQuestConditions(section):
 
 
 def init():
-    sub_parsers.setEffectsParsers({'save-setting': readSaveTutorialSettingSection})
+    sub_parsers.setEffectsParsers({'save-setting': readSaveTutorialSettingSection,
+     'save-account-setting': readSaveAccountSettingSection})
     sub_parsers.setEntitiesParsers({'hint': chains._readHintSection,
      'tutorial-setting': readTutorialSettingSection})
     sub_parsers.setTriggersParsers({'bonus': lobby.readBonusTriggerSection,
+     'premiumDiscount': lobby.readPremiumDiscountsUseTriggerSection,
      'allTutorialBonuses': _readAllTurorialBonusesTriggerSection,
      'randomBattlesCount': _readRandomBattlesCountTriggerSection,
      'researchModule': _readResearchModuleTriggerSection,
@@ -111,7 +114,6 @@ def init():
      'xpExchange': _readXpExchangeTriggerSection,
      'tutorialIntSetting': readTutorialIntSettingTriggerSection,
      'chapterBonus': _readChapterBonusTriggerSection,
-     'premiumDiscount': _readPremiumDiscountTriggerSection,
      'installItems': _readItemsInstallTriggerSection,
      'invalidateFlags': _readInvalidateFlagsTriggerSection,
      'timer': _readTimerTriggerSection,

@@ -27,10 +27,6 @@ class BattleLoadingMeta(View):
         if self._isDAAPIInited():
             return self.flashObject.as_setMapIcon(source)
 
-    def as_setTipImageS(self, source):
-        if self._isDAAPIInited():
-            return self.flashObject.as_setTipImage(source)
-
     def as_setPlayerDataS(self, playerVehicleID, prebattleID):
         if self._isDAAPIInited():
             return self.flashObject.as_setPlayerData(playerVehicleID, prebattleID)

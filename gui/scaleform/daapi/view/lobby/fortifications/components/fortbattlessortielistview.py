@@ -1,4 +1,5 @@
 #Embedded file name: scripts/client/gui/Scaleform/daapi/view/lobby/fortifications/components/FortBattlesSortieListView.py
+import BigWorld
 from constants import PREBATTLE_TYPE
 from gui.ClientUpdateManager import g_clientUpdateManager
 from gui.LobbyContext import g_lobbyContext
@@ -11,25 +12,21 @@ from gui.Scaleform.locale.FORTIFICATIONS import FORTIFICATIONS
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.game_control.battle_availability import getForbiddenPeriods
 from gui.prb_control.prb_helpers import UnitListener
-from gui.shared.fortifications.fort_helpers import FortListener, adjustDefenceHourToLocal
+from gui.shared.fortifications.fort_helpers import FortListener
 from gui.shared.fortifications.settings import CLIENT_FORT_STATE
 from helpers import int2roman
+from helpers.time_utils import ONE_HOUR
 from messenger.proto.events import g_messengerEvents
 from messenger.m_constants import USER_ACTION_ID
 from predefined_hosts import g_preDefinedHosts
 
-def formatGuiTimeLimitStr(startHour, endHour, useLocalTime = True):
+def formatGuiTimeLimitStr(startHour, endHour):
 
     def _formatHour(hour):
-        if hour > 23:
-            hour = 0
-        locHours = adjustDefenceHourToLocal(hour)[0] if useLocalTime else hour
-        return '{:02n}'.format(locHours)
+        return BigWorld.wg_getShortTimeFormat(hour * ONE_HOUR)
 
-    return {'startHour': _formatHour(startHour),
-     'startMin': '00',
-     'endHour': _formatHour(endHour),
-     'endMin': '00'}
+    return {'startTime': _formatHour(startHour),
+     'endTime': _formatHour(endHour)}
 
 
 class FortBattlesSortieListView(FortListMeta, FortListener, UnitListener):

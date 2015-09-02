@@ -254,6 +254,16 @@ def _isItemMoneyEnough(itemCD):
     return result
 
 
+def _isItemMayInstall(itemCD, vehicleCD):
+    item = getItemByIntCD(itemCD)
+    vehicle = getVehicleByIntCD(vehicleCD)
+    if item is not None:
+        result, _ = item.mayInstall(vehicle, 0)
+    else:
+        result = False
+    return result
+
+
 def _isItemLevelEqual(itemCD, level):
     if level is None:
         return False
@@ -270,7 +280,8 @@ _ITEM_STATES = {CONDITION_STATE.SELECTED: _isItemSelected,
  CONDITION_STATE.UNLOCKED: _isItemUnlocked,
  CONDITION_STATE.XP_ENOUGH: _isItemXPEnough,
  CONDITION_STATE.MONEY_ENOUGH: _isItemMoneyEnough,
- CONDITION_STATE.LEVEL: _isItemLevelEqual}
+ CONDITION_STATE.LEVEL: _isItemLevelEqual,
+ CONDITION_STATE.MAY_INSTALL: _isItemMayInstall}
 
 def getItemStateGetter(state):
     if state in _ITEM_STATES:

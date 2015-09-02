@@ -85,6 +85,7 @@ class TOOLTIPS_CONSTANTS(object):
     VEHICLE_UI = 'TooltipVehicleUI'
     EQUIPMENT_UI = 'ToolTipEquipmentUI'
     RSS_NEWS_UI = 'ToolTipRSSNewsUI'
+    INBLOCKS_DEFAULT_UI = 'ToolTipInblocksDefaultUI'
     FINAL_STSTS_UI = 'ToolTipInblocksDefaultUI'
     IGR_INFO_UI = 'ToolTipIGRUI'
     SUITABLE_VEHICLE_UI = 'ToolTipSuitableVehicleUI'

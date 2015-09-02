@@ -9,9 +9,10 @@ class FalloutBattleSelectorWindowMeta(AbstractWindowView):
     def onMultiteamBtnClick(self):
         self._printOverrideError('onMultiteamBtnClick')
 
-    def getTooltipForBtn(self, tooltipKey):
-        self._printOverrideError('getTooltipForBtn')
-
     def as_setInitDataS(self, data):
         if self._isDAAPIInited():
             return self.flashObject.as_setInitData(data)
+
+    def as_setBtnStatesS(self, data):
+        if self._isDAAPIInited():
+            return self.flashObject.as_setBtnStates(data)

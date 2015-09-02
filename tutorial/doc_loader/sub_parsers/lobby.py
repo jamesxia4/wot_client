@@ -48,6 +48,10 @@ def readPremiumPeriodChangedTriggerSection(xmlCtx, section, chapter, triggerID):
     return triggers.PremiumPeriodChangedTrigger(triggerID)
 
 
+def readPremiumDiscountsUseTriggerSection(xmlCtx, section, chapter, triggerID):
+    return triggers.PremiumDiscountUseTrigger(triggerID)
+
+
 def readFreeXPChangedTriggerSection(xmlCtx, section, chapter, triggerID):
     return triggers.FreeXPChangedTrigger(triggerID)
 

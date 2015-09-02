@@ -66,16 +66,9 @@ def _readTips():
                             arenaGuiTypeCondition = _ArenaGuiTypeCondition(arenaGuiTypeParts[0], arenaGuiTypeParts[1:])
                             for arenaGuiType in ARENA_GUI_TYPE.RANGE:
                                 if arenaGuiTypeCondition.validate(arenaGuiType):
-                                    result[battleCondition][arenaGuiType][vehicleTypeCondition][nation][vehLevel].append((i18n.makeString('#tips:%s' % status), i18n.makeString('#tips:%s' % key), _getTipIcon(tipID, group)))
+                                    result[battleCondition][arenaGuiType][vehicleTypeCondition][nation][vehLevel].append((i18n.makeString('#tips:%s' % status), i18n.makeString('#tips:%s' % key)))
 
     return result
-
-
-def _getTipIcon(tipID, group):
-    currentTipImage = TIPS_IMAGE_SOURCE % tipID
-    if currentTipImage in RES_ICONS.MAPS_ICONS_BATTLELOADING_TIPS_ENUM:
-        return currentTipImage
-    return TIPS_GROUPS_SOURCE % group
 
 
 def _getIntValue(strCondition):

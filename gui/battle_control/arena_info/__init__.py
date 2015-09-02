@@ -29,6 +29,10 @@ def getArenaTypeID(avatar = None):
     return arenaTypeID
 
 
+def getPlayerVehicleID():
+    return getattr(BigWorld.player(), 'playerVehicleID', 0)
+
+
 def isPlayerTeamKillSuspected():
     return bool(getattr(BigWorld.player(), 'tkillIsSuspected', 0))
 

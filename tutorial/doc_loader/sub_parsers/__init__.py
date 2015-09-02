@@ -45,7 +45,9 @@ _GAME_ITEM_CONDITION_TAGS = {'selected': _COND_STATE.SELECTED,
  'money-enough': _COND_STATE.MONEY_ENOUGH,
  'money-not-enough': ~_COND_STATE.MONEY_ENOUGH,
  'level': _COND_STATE.LEVEL,
- 'not-level': ~_COND_STATE.LEVEL}
+ 'not-level': ~_COND_STATE.LEVEL,
+ 'may-install': _COND_STATE.MAY_INSTALL,
+ 'may-not-install': ~_COND_STATE.MAY_INSTALL}
 _GAME_ITEM_CONDITION_SET = set(_GAME_ITEM_CONDITION_TAGS.keys())
 
 def _readGameItemCondition(xmlCtx, section, _):
@@ -57,7 +59,7 @@ def _readGameItemCondition(xmlCtx, section, _):
             return None
         tag = tags.pop()
         state = _GAME_ITEM_CONDITION_TAGS[tag]
-        if state in _COND_STATE.GAME_ITEM_RELATE_STATE:
+        if state.base in _COND_STATE.GAME_ITEM_RELATE_STATE:
             otherID = parseID(xmlCtx, section[tag], 'Specify a other ID')
             return conditions.GameItemRelateStateCondition(varID, otherID, state)
         else:

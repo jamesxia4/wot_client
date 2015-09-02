@@ -113,11 +113,8 @@ class ServerSettingsManager(object):
                                   TUTORIAL.PERSONAL_CASE: 2,
                                   TUTORIAL.RESEARCH: 3,
                                   TUTORIAL.RESEARCH_TREE: 4,
-                                  TUTORIAL.MEDKIT_INSTALLED: 5,
                                   TUTORIAL.MEDKIT_USED: 6,
-                                  TUTORIAL.REPAIRKIT_INSTALLED: 7,
                                   TUTORIAL.REPAIRKIT_USED: 8,
-                                  TUTORIAL.FIRE_EXTINGUISHER_INSTALLED: 9,
                                   TUTORIAL.FIRE_EXTINGUISHER_USED: 10,
                                   TUTORIAL.WAS_QUESTS_TUTORIAL_STARTED: 11}, offsets={})}
     AIM_MAPPING = {'net': 1,

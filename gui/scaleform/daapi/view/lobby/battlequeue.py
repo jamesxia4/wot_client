@@ -82,7 +82,7 @@ class BattleQueue(BattleQueueMeta, LobbySubView):
         if dispatcher is not None:
             dispatcher.exitFromQueue()
 
-    def onQueueInfoReceived(self, randomsQueueInfo, companiesQueueInfo, historicalQueueInfo):
+    def onQueueInfoReceived(self, randomsQueueInfo, companiesQueueInfo, historicalQueueInfo, eventQueueInfo):
         if prb_control.isCompany():
             data = {'title': '#menu:prebattle/typesCompaniesTitle',
              'data': list()}
@@ -116,6 +116,21 @@ class BattleQueue(BattleQueueMeta, LobbySubView):
                 vClassesData.append((message, byClassA + byClassB))
 
             self.as_setListByTypeS(data)
+        elif prb_control.isInEventBattlesQueue():
+            info = dict(eventQueueInfo)
+            vClasses = info.get('classes', [])
+            vClassesLen = len(vClasses)
+            totalPlayers = info.get('players', 0)
+            self.flashObject.as_setPlayers(makeHtmlString('html_templates:lobby/queue/playersLabel', 'players', {'count': totalPlayers}))
+            if vClassesLen:
+                data = {'title': '#menu:prebattle/typesTitle',
+                 'data': []}
+                vClassesData = data['data']
+                for vClass, message in BattleQueue.TYPES_ORDERED:
+                    idx = constants.VEHICLE_CLASS_INDICES[vClass]
+                    vClassesData.append((message, vClasses[idx] if idx < vClassesLen else 0))
+
+                self.as_setListByTypeS(data)
         else:
             info = dict(randomsQueueInfo)
             if 'classes' in info:
@@ -157,6 +172,8 @@ class BattleQueue(BattleQueueMeta, LobbySubView):
                 qType = constants.QUEUE_TYPE.COMPANIES
             elif prb_control.isInHistoricalQueue():
                 qType = constants.QUEUE_TYPE.HISTORICAL
+            elif prb_control.isInEventBattlesQueue():
+                qType = constants.QUEUE_TYPE.EVENT_BATTLES
             else:
                 qType = constants.QUEUE_TYPE.RANDOMS
             currPlayer.requestQueueInfo(qType)

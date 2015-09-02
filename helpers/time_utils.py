@@ -119,8 +119,11 @@ def getTimeDeltaTilNow(t):
     return 0
 
 
-def getTillTimeString(timeValue, keyNamespace):
+def getTillTimeString(timeValue, keyNamespace, isRoundUp = False):
     gmtime = time.gmtime(timeValue)
+    if isRoundUp and gmtime.tm_sec > 0:
+        timeValue += ONE_MINUTE
+        gmtime = time.gmtime(timeValue)
     if timeValue >= ONE_DAY:
         fmtKey = 'days'
         gmtime = time.gmtime(timeValue - ONE_DAY)

@@ -428,9 +428,10 @@ class _FlagsMarkerPlugin(IPlugin):
         for flagID, flagInfo in g_ctfManager.getFlags():
             vehicleID = flagInfo['vehicle']
             if vehicleID is None:
-                if flagInfo['state'] == constants.FLAG_STATE.WAITING_FIRST_SPAWN:
+                flagState = flagInfo['state']
+                if flagState == constants.FLAG_STATE.WAITING_FIRST_SPAWN:
                     self.__onFlagSpawning(flagID, flagInfo['respawnTime'])
-                else:
+                elif flagState in (constants.FLAG_STATE.ON_GROUND, constants.FLAG_STATE.ON_SPAWN):
                     self.__onSpawnedAtBase(flagID, flagInfo['team'], flagInfo['minimapPos'])
             elif vehicleID == playerVehicleID:
                 isFlagBearer = True

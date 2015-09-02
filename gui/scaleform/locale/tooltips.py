@@ -378,6 +378,8 @@ class TOOLTIPS(object):
     STATICFORMATIONSTAFFVIEW_LBLSTAFFED = '#tooltips:StaticFormationStaffView/lblStaffed'
     STATICFORMATIONSTAFFVIEW_INVITEBTNDIS = STATICFORMATIONSTAFFVIEW_INVITEBTN + 'Dis'
     MULTISELECTION_ALERT = '#tooltips:multiselection/alert'
+    BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN = '#tooltips:battleSelectorWindow/tooltip/domination/selectBtn'
+    BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN = '#tooltips:battleSelectorWindow/tooltip/multiteam/selectBtn'
     PREMIUM_DAYS_HEADER = '#tooltips:premium/days/header'
     PREMIUM_DAYS_PARAMS_BUY = '#tooltips:premium/days/params/buy'
     PREMIUM_DAYS_PARAMS_OLDPRICE = '#tooltips:premium/days/params/oldPrice'
@@ -1057,6 +1059,7 @@ class TOOLTIPS(object):
     QUESTS_VEHICLESEASONAWARD_ABOUTBTN_BODY = QUESTS_VEHICLESEASONAWARD_ABOUTBTN + '/body'
     QUESTS_VEHICLESBONUS_TITLE = '#tooltips:quests/vehiclesBonus/title'
     QUESTS_VEHICLESBONUS_VEHICLESLEFT = '#tooltips:quests/vehiclesBonus/vehiclesLeft'
+    VEHICLESTATUS_BODY = '#tooltips:vehicleStatus/body'
     VEHICLESTATUS_BATTLE_HEADER = '#tooltips:vehicleStatus/battle/header'
     VEHICLESTATUS_LOCKED_HEADER = '#tooltips:vehicleStatus/locked/header'
     VEHICLESTATUS_RENTALISOVER_HEADER = '#tooltips:vehicleStatus/rentalIsOver/header'
@@ -1967,22 +1970,14 @@ class TOOLTIPS(object):
     HANGARTUTORIAL_EQUIPMENT_DESCRIPTION = '#tooltips:hangarTutorial/equipment/description'
     HANGARTUTORIAL_EQUIPMENT_PREM_TITLE = '#tooltips:hangarTutorial/equipment/prem/title'
     HANGARTUTORIAL_EQUIPMENT_PREM_DESCRIPTION = '#tooltips:hangarTutorial/equipment/prem/description'
-    BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN_HEADER = '#tooltips:battleSelectorWindow/tooltip/domination/selectBtn/header'
-    BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN_BODY = '#tooltips:battleSelectorWindow/tooltip/domination/selectBtn/body'
-    BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN_HEADER = '#tooltips:battleSelectorWindow/tooltip/multiteam/selectBtn/header'
-    BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN_BODY = '#tooltips:battleSelectorWindow/tooltip/multiteam/selectBtn/body'
+    BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN_HEADER = BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN + '/header'
+    BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN_BODY = BATTLESELECTORWINDOW_TOOLTIP_DOMINATION_SELECTBTN + '/body'
+    BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN_HEADER = BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN + '/header'
+    BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN_BODY = BATTLESELECTORWINDOW_TOOLTIP_MULTITEAM_SELECTBTN + '/body'
     BOOSTER_QUESTLINKBTN_BODY = '#tooltips:booster/questLinkBtn/body'
     BOOSTER_ACTIVEBTN_DISABLED_BODY = '#tooltips:booster/activeBtn/disabled/body'
     BOOSTERSPANEL_OPENBOOSTERSWINDOW_BODY = '#tooltips:boostersPanel/openBoostersWindow/body'
     BOOSTERSPANEL_BOOSTERDESCRIPTION_NOTE = '#tooltips:boostersPanel/boosterDescription/note'
-    TECHTREEPAGE_NATIONS_ENUM = (TECHTREEPAGE_NATIONS_USSR,
-     TECHTREEPAGE_NATIONS_GERMANY,
-     TECHTREEPAGE_NATIONS_USA,
-     TECHTREEPAGE_NATIONS_CHINA,
-     TECHTREEPAGE_NATIONS_FRANCE,
-     TECHTREEPAGE_NATIONS_UK,
-     TECHTREEPAGE_NATIONS_JAPAN,
-     TECHTREEPAGE_NATIONS_CZECH)
     CONTACT_STATUS_INBATTLE_ENUM = (CONTACT_STATUS_INBATTLE_UNKNOWN,
      CONTACT_STATUS_INBATTLE_RANDOM,
      CONTACT_STATUS_INBATTLE_TRAINING,
@@ -1992,15 +1987,58 @@ class TOOLTIPS(object):
      CONTACT_STATUS_INBATTLE_HISTORICAL,
      CONTACT_STATUS_INBATTLE_FORTIFICATIONS,
      CONTACT_STATUS_INBATTLE_SPECIAL)
-    ACHIEVEMENT_PARAMS_LEFT_ENUM = (ACHIEVEMENT_PARAMS_LEFT4,
-     ACHIEVEMENT_PARAMS_LEFT3,
-     ACHIEVEMENT_PARAMS_LEFT2,
-     ACHIEVEMENT_PARAMS_LEFT1)
+    TECHTREEPAGE_NATIONS_ENUM = (TECHTREEPAGE_NATIONS_USSR,
+     TECHTREEPAGE_NATIONS_GERMANY,
+     TECHTREEPAGE_NATIONS_USA,
+     TECHTREEPAGE_NATIONS_CHINA,
+     TECHTREEPAGE_NATIONS_FRANCE,
+     TECHTREEPAGE_NATIONS_UK,
+     TECHTREEPAGE_NATIONS_JAPAN,
+     TECHTREEPAGE_NATIONS_CZECH)
+    FORTIFICATION_TRANSPORTING_ENUM = (FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_HEADER,
+     FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_BODY,
+     FORTIFICATION_TRANSPORTING_COOLDOWN_HEADER,
+     FORTIFICATION_TRANSPORTING_COOLDOWN_BODY,
+     FORTIFICATION_TRANSPORTING_FOUNDATION_HEADER,
+     FORTIFICATION_TRANSPORTING_FOUNDATION_BODY,
+     FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_HEADER,
+     FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_BODY)
+    PRIVATEQUESTS_PARAMS_ENUM = (PRIVATEQUESTS_PARAMS_SHEETS,
+     PRIVATEQUESTS_PARAMS_RECRUITTANKMANFEMALE,
+     PRIVATEQUESTS_PARAMS_COLLECTEDSHEETS,
+     PRIVATEQUESTS_PARAMS_COMPETEDTASKS,
+     PRIVATEQUESTS_PARAMS_RECRUITEDTANKMANFEMALE)
+    TANKCARUSEL_LOCK_ENUM = (TANKCARUSEL_LOCK_HEADER,
+     TANKCARUSEL_LOCK_TO,
+     TANKCARUSEL_LOCK_CLAN,
+     TANKCARUSEL_LOCK_TOURNAMENT,
+     TANKCARUSEL_LOCK_ROAMING)
     ACTIONPRICE_SELL_TYPE_ENUM = (ACTIONPRICE_SELL_TYPE_VEHICLE,
      ACTIONPRICE_SELL_TYPE_MODULE,
      ACTIONPRICE_SELL_TYPE_EQUIPMENT,
      ACTIONPRICE_SELL_TYPE_SHELL,
      ACTIONPRICE_SELL_TYPE_OPTIONALDEVICE)
+    SQUADWINDOW_STATUS_ENUM = (SQUADWINDOW_STATUS_COMMANDER,
+     SQUADWINDOW_STATUS_NORMAL,
+     SQUADWINDOW_STATUS_CANCELED,
+     SQUADWINDOW_STATUS_READY,
+     SQUADWINDOW_STATUS_INBATTLE,
+     SQUADWINDOW_STATUS_LOCKED)
+    TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM = (TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_CREDITS, TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_TANKMAN, TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_VEHICLEWITHTANKMEN)
+    LEVEL_ENUM = (LEVEL_1,
+     LEVEL_2,
+     LEVEL_3,
+     LEVEL_4,
+     LEVEL_5,
+     LEVEL_6,
+     LEVEL_7,
+     LEVEL_8,
+     LEVEL_9,
+     LEVEL_10)
+    ACHIEVEMENT_PARAMS_LEFT_ENUM = (ACHIEVEMENT_PARAMS_LEFT4,
+     ACHIEVEMENT_PARAMS_LEFT3,
+     ACHIEVEMENT_PARAMS_LEFT2,
+     ACHIEVEMENT_PARAMS_LEFT1)
     VEHICLE_ENUM = (VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU,
      VEHICLE_GRAPH_NOTES_SHOWINFOWINDOW,
      VEHICLE_GRAPH_NOTES_VEHICLEUNLOCK,
@@ -2047,6 +2085,7 @@ class TOOLTIPS(object):
      VEHICLEIGR_SPECIALABILITY,
      VEHICLEIGR_DAYS,
      VEHICLEIGR_HOURS,
+     VEHICLESTATUS_BODY,
      VEHICLESTATUS_BATTLE_HEADER,
      VEHICLESTATUS_LOCKED_HEADER,
      VEHICLESTATUS_RENTALISOVER_HEADER,
@@ -2091,23 +2130,6 @@ class TOOLTIPS(object):
      VEHICLESELECTOR_OVERFLOWLEVEL_BODY,
      VEHICLESELECTOR_INCOMPATIBLETYPE_HEADER,
      VEHICLESELECTOR_INCOMPATIBLETYPE_BODY)
-    TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM = (TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_LIGHTTANK,
-     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_MEDIUMTANK,
-     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_HEAVYTANK,
-     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_AT_SPG,
-     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_SPG)
-    TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM = (TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_CREDITS, TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_TANKMAN, TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_VEHICLEWITHTANKMEN)
-    PRIVATEQUESTS_PARAMS_ENUM = (PRIVATEQUESTS_PARAMS_SHEETS,
-     PRIVATEQUESTS_PARAMS_RECRUITTANKMANFEMALE,
-     PRIVATEQUESTS_PARAMS_COLLECTEDSHEETS,
-     PRIVATEQUESTS_PARAMS_COMPETEDTASKS,
-     PRIVATEQUESTS_PARAMS_RECRUITEDTANKMANFEMALE)
-    SQUADWINDOW_STATUS_ENUM = (SQUADWINDOW_STATUS_COMMANDER,
-     SQUADWINDOW_STATUS_NORMAL,
-     SQUADWINDOW_STATUS_CANCELED,
-     SQUADWINDOW_STATUS_READY,
-     SQUADWINDOW_STATUS_INBATTLE,
-     SQUADWINDOW_STATUS_LOCKED)
     LOGIN_SOCIAL_ENUM = (LOGIN_SOCIAL_ENTER_HEADER,
      LOGIN_SOCIAL_ENTER_BODY,
      LOGIN_SOCIAL_FACEBOOK,
@@ -2117,37 +2139,11 @@ class TOOLTIPS(object):
      LOGIN_SOCIAL_VKONTAKTE,
      LOGIN_SOCIAL_ODNOKLASSNIKI,
      LOGIN_SOCIAL_WGNI)
-    LEVEL_ENUM = (LEVEL_1,
-     LEVEL_2,
-     LEVEL_3,
-     LEVEL_4,
-     LEVEL_5,
-     LEVEL_6,
-     LEVEL_7,
-     LEVEL_8,
-     LEVEL_9,
-     LEVEL_10)
-    FORTIFICATION_TRANSPORTING_ENUM = (FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_HEADER,
-     FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_BODY,
-     FORTIFICATION_TRANSPORTING_COOLDOWN_HEADER,
-     FORTIFICATION_TRANSPORTING_COOLDOWN_BODY,
-     FORTIFICATION_TRANSPORTING_FOUNDATION_HEADER,
-     FORTIFICATION_TRANSPORTING_FOUNDATION_BODY,
-     FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_HEADER,
-     FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_BODY)
-    TANKCARUSEL_LOCK_ENUM = (TANKCARUSEL_LOCK_HEADER,
-     TANKCARUSEL_LOCK_TO,
-     TANKCARUSEL_LOCK_CLAN,
-     TANKCARUSEL_LOCK_TOURNAMENT,
-     TANKCARUSEL_LOCK_ROAMING)
-
-    @staticmethod
-    def techtreepage_nations(key):
-        outcome = '#tooltips:techTreePage/nations/%s' % key
-        if outcome not in TOOLTIPS.TECHTREEPAGE_NATIONS_ENUM:
-            LOG_WARNING('locale key "' + outcome + '" was not found')
-            return None
-        return outcome
+    TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM = (TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_LIGHTTANK,
+     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_MEDIUMTANK,
+     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_HEAVYTANK,
+     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_AT_SPG,
+     TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_SPG)
 
     @staticmethod
     def contact_status_inbattle(key):
@@ -2158,37 +2154,17 @@ class TOOLTIPS(object):
         return outcome
 
     @staticmethod
-    def achievement_params_left(key):
-        outcome = '#tooltips:achievement/params/left4%s' % key
-        if outcome not in TOOLTIPS.ACHIEVEMENT_PARAMS_LEFT_ENUM:
-            raise Exception, 'locale key "' + outcome + '" was not found'
+    def techtreepage_nations(key):
+        outcome = '#tooltips:techTreePage/nations/%s' % key
+        if outcome not in TOOLTIPS.TECHTREEPAGE_NATIONS_ENUM:
+            LOG_WARNING('locale key "' + outcome + '" was not found')
+            return None
         return outcome
 
     @staticmethod
-    def actionprice_sell_type(key):
-        outcome = '#tooltips:actionPrice/sell/type/%s' % key
-        if outcome not in TOOLTIPS.ACTIONPRICE_SELL_TYPE_ENUM:
-            raise Exception, 'locale key "' + outcome + '" was not found'
-        return outcome
-
-    @staticmethod
-    def vehicle(key):
-        outcome = '#tooltips:vehicle/%s' % key
-        if outcome not in TOOLTIPS.VEHICLE_ENUM:
-            raise Exception, 'locale key "' + outcome + '" was not found'
-        return outcome
-
-    @staticmethod
-    def tankcaruseltooltip_vehicletype_elite(key):
-        outcome = '#tooltips:tankCaruselTooltip/vehicleType/elite/%s' % key
-        if outcome not in TOOLTIPS.TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM:
-            raise Exception, 'locale key "' + outcome + '" was not found'
-        return outcome
-
-    @staticmethod
-    def tooltiprefsysdescription_awards_descr(key):
-        outcome = '#tooltips:ToolTipRefSysDescription/awards/descr/%s' % key
-        if outcome not in TOOLTIPS.TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM:
+    def fortification_transporting(key):
+        outcome = '#tooltips:fortification/transporting/%s' % key
+        if outcome not in TOOLTIPS.FORTIFICATION_TRANSPORTING_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 
@@ -2200,6 +2176,20 @@ class TOOLTIPS(object):
         return outcome
 
     @staticmethod
+    def tankcarusel_lock(key):
+        outcome = '#tooltips:tankCarusel/lock/%s' % key
+        if outcome not in TOOLTIPS.TANKCARUSEL_LOCK_ENUM:
+            raise Exception, 'locale key "' + outcome + '" was not found'
+        return outcome
+
+    @staticmethod
+    def actionprice_sell_type(key):
+        outcome = '#tooltips:actionPrice/sell/type/%s' % key
+        if outcome not in TOOLTIPS.ACTIONPRICE_SELL_TYPE_ENUM:
+            raise Exception, 'locale key "' + outcome + '" was not found'
+        return outcome
+
+    @staticmethod
     def squadwindow_status(key):
         outcome = '#tooltips:squadWindow/status/%s' % key
         if outcome not in TOOLTIPS.SQUADWINDOW_STATUS_ENUM:
@@ -2207,9 +2197,9 @@ class TOOLTIPS(object):
         return outcome
 
     @staticmethod
-    def login_social(key):
-        outcome = '#tooltips:login/social/%s' % key
-        if outcome not in TOOLTIPS.LOGIN_SOCIAL_ENUM:
+    def tooltiprefsysdescription_awards_descr(key):
+        outcome = '#tooltips:ToolTipRefSysDescription/awards/descr/%s' % key
+        if outcome not in TOOLTIPS.TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 
@@ -2221,15 +2211,29 @@ class TOOLTIPS(object):
         return outcome
 
     @staticmethod
-    def fortification_transporting(key):
-        outcome = '#tooltips:fortification/transporting/%s' % key
-        if outcome not in TOOLTIPS.FORTIFICATION_TRANSPORTING_ENUM:
+    def achievement_params_left(key):
+        outcome = '#tooltips:achievement/params/left4%s' % key
+        if outcome not in TOOLTIPS.ACHIEVEMENT_PARAMS_LEFT_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome
 
     @staticmethod
-    def tankcarusel_lock(key):
-        outcome = '#tooltips:tankCarusel/lock/%s' % key
-        if outcome not in TOOLTIPS.TANKCARUSEL_LOCK_ENUM:
+    def vehicle(key):
+        outcome = '#tooltips:vehicle/%s' % key
+        if outcome not in TOOLTIPS.VEHICLE_ENUM:
+            raise Exception, 'locale key "' + outcome + '" was not found'
+        return outcome
+
+    @staticmethod
+    def login_social(key):
+        outcome = '#tooltips:login/social/%s' % key
+        if outcome not in TOOLTIPS.LOGIN_SOCIAL_ENUM:
+            raise Exception, 'locale key "' + outcome + '" was not found'
+        return outcome
+
+    @staticmethod
+    def tankcaruseltooltip_vehicletype_elite(key):
+        outcome = '#tooltips:tankCaruselTooltip/vehicleType/elite/%s' % key
+        if outcome not in TOOLTIPS.TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM:
             raise Exception, 'locale key "' + outcome + '" was not found'
         return outcome

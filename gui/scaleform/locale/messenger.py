@@ -154,6 +154,8 @@ class MESSENGER(object):
     DIALOGS_FALLOUTSQUADCHANNEL_VEHICLESREQUIRED_DOMINATION_MAX = '#messenger:dialogs/falloutSquadChannel/vehiclesRequired/domination/max'
     DIALOGS_FALLOUTSQUADCHANNEL_VEHICLESREQUIRED_DOMINATION_MIN = '#messenger:dialogs/falloutSquadChannel/vehiclesRequired/domination/min'
     DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFY = '#messenger:dialogs/falloutSquadChannel/vehicleNotify'
+    DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFYRANGE = '#messenger:dialogs/falloutSquadChannel/vehicleNotifyRange'
+    DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFYMULTITEAM = '#messenger:dialogs/falloutSquadChannel/vehicleNotifyMultiteam'
     DIALOGS_SQUADCHANNEL_CHATNAME = '#messenger:dialogs/squadChannel/chatName'
     DIALOGS_SQUADCHANNEL_MEMBERS = '#messenger:dialogs/squadChannel/members'
     DIALOGS_SQUADCHANNEL_VEHICLES = '#messenger:dialogs/squadChannel/vehicles'

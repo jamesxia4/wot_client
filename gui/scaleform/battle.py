@@ -590,7 +590,7 @@ class Battle(BattleWindow):
                 if getIsMultiteam():
                     winText = i18n.makeString(ARENAS.TYPE_FALLOUTMUTLITEAM_DESCRIPTION)
                 else:
-                    winText = i18n.makeString(ARENAS.TYPE_FALLOUT_DESCRIPTION)
+                    winText = i18n.makeString('#arenas:type/%s/description' % arenaSubType)
             arenaData.append(winText)
             arenaData.append(typeEvent)
             vehInfo = arenaDP.getVehicleInfo(arenaDP.getPlayerVehicleID())

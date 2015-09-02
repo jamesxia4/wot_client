@@ -1205,7 +1205,7 @@ class LadderRegulations(ToolTipBaseData):
         forbiddenHours = []
         for forbiddenPeriod in forbiddenPeriods:
             guiTimeLimit = formatGuiTimeLimitStr(*forbiddenPeriod)
-            forbiddenHours.append(i18n.makeString(CYBERSPORT.LADDERREGULATIONS_TOOLTIP_DATE, startHour=guiTimeLimit['startHour'], startMin=guiTimeLimit['startMin'], endHour=guiTimeLimit['endHour'], endMin=guiTimeLimit['endMin']))
+            forbiddenHours.append(i18n.makeString(CYBERSPORT.LADDERREGULATIONS_TOOLTIP_DATE, startTime=guiTimeLimit['startTime'], endTime=guiTimeLimit['endTime']))
 
         return ', '.join(forbiddenHours)
 

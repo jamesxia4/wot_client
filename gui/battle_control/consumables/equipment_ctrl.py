@@ -376,7 +376,7 @@ class EquipmentsController(object):
             return (False, None)
         result, error = True, None
         for intCD, item in self.__equipments.iteritems():
-            if item.getTag() == tag:
+            if item.getTag() == tag and item.getQuantity() > 0:
                 result, error = self.__doChangeSetting(item, entityName, avatar)
                 break
 

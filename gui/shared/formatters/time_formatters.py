@@ -30,8 +30,8 @@ def getTimeLeftStr(localization, timeLeft, timeStyle = None, ctx = None, formatt
     return result
 
 
-def getTimeDurationStr(seconds):
-    return time_utils.getTillTimeString(seconds, MENU.TIME_TIMEVALUE)
+def getTimeDurationStr(seconds, useRoundUp = False):
+    return time_utils.getTillTimeString(seconds, MENU.TIME_TIMEVALUE, useRoundUp)
 
 
 class RentLeftFormatter(object):

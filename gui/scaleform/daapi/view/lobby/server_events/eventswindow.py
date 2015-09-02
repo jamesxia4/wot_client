@@ -75,7 +75,7 @@ class EventsWindow(QuestsWindowMeta):
             if eventType == constants.EVENT_TYPE.POTAPOV_QUEST:
                 pQuest = g_eventsCache.potapov.getQuests()[int(eventID)]
                 self._navInfo.selectPotapovQuest(pQuest.getTileID(), pQuest.getID())
-            if eventType == constants.EVENT_TYPE.TUTORIAL:
+            elif eventType == constants.EVENT_TYPE.TUTORIAL:
                 self._navInfo.selectTutorialQuest(eventID)
             else:
                 self._navInfo.selectCommonQuest(eventID)

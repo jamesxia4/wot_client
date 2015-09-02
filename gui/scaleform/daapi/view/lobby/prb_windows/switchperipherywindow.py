@@ -40,9 +40,8 @@ class SwitchPeripheryWindow(SwitchPeripheryWindowMeta):
     def _updateServersList(self):
         hostsList = g_preDefinedHosts.getSimpleHostsList(g_preDefinedHosts.hostsWithRoaming())
         serversList = []
-        forbiddenPeripherieIDs = self.__ctx.getForbiddenPeripherieIDs()
         for key, name, csisStatus, peripheryID in hostsList:
-            if peripheryID not in forbiddenPeripherieIDs:
+            if peripheryID not in self.__ctx.getForbiddenPeripherieIDs():
                 serversList.append({'label': name if not constants.IS_CHINA else makeHtmlString('html_templates:lobby/serverStats', 'serverName', {'name': name}),
                  'id': peripheryID,
                  'csisStatus': csisStatus,
@@ -51,13 +50,10 @@ class SwitchPeripheryWindow(SwitchPeripheryWindowMeta):
         label = _ms(self.__ctx.getSelectServerLabel())
         if len(serversList) == 1:
             label = _ms(self.__ctx.getApplySwitchLabel(), server=text_styles.stats(serversList[0]['label']))
-        if serversList:
-            self.as_setDataS({'label': label,
-             'peripheries': serversList,
-             'isServerDropdownMenuVisibility': len(serversList) > 1,
-             'selectedIndex': 0})
-        else:
-            raise Exception('Server list is empty!')
+        self.as_setDataS({'label': label,
+         'peripheries': serversList,
+         'isServerDropdownMenuVisibility': len(serversList) > 1,
+         'selectedIndex': 0})
 
     def _populate(self):
         super(SwitchPeripheryWindow, self)._populate()

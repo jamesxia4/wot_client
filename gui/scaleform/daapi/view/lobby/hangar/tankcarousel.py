@@ -184,7 +184,6 @@ class TankCarousel(TankCarouselMeta, GlobalListener):
         hasEmptySlots = self.__multiselectionMode and len(self.__falloutCtrl.getEmptySlots()) > 0
         vehsData = {}
         for intCD in vehicles:
-            data = None
             vehicle = filteredVehs.get(intCD)
             if vehicle is not None:
                 vState, vStateLvl = vehicle.getState()
@@ -194,32 +193,7 @@ class TankCarousel(TankCarouselMeta, GlobalListener):
                     vState, vStateLvl = Vehicle.VEHICLE_STATE.NOT_SUITABLE, Vehicle.VEHICLE_STATE_LEVEL.WARNING
                 canSelect, tooltip = self.__falloutCtrl.canSelectVehicle(vehicle)
                 rentInfoStr = RentLeftFormatter(vehicle.rentInfo, vehicle.isPremiumIGR).getRentLeftStr()
-                data = {'id': vehicle.invID,
-                 'inventoryId': vehicle.invID,
-                 'label': vehicle.shortUserName if vehicle.isPremiumIGR else vehicle.userName,
-                 'image': vehicle.icon,
-                 'nation': vehicle.nationID,
-                 'level': vehicle.level,
-                 'stat': vState,
-                 'statStr': self.getStringStatus(vState),
-                 'stateLevel': vStateLvl,
-                 'doubleXPReceived': vehicle.dailyXPFactor,
-                 'compactDescr': vehicle.intCD,
-                 'favorite': vehicle.isFavorite,
-                 'clanLock': vehicle.clanLock,
-                 'elite': vehicle.isElite,
-                 'premium': vehicle.isPremium,
-                 'tankType': vehicle.type,
-                 'current': 0,
-                 'enabled': True,
-                 'rentLeft': rentInfoStr,
-                 'selectableForSlot': self.__multiselectionMode and vehicle.isFalloutAvailable and hasEmptySlots,
-                 'selectedInSlot': self.__multiselectionMode and vehicle.isFalloutSelected,
-                 'activateButtonLabel': FALLOUT.TANKCAROUSELSLOT_ACTIVATEBUTTON,
-                 'deactivateButtonLabel': FALLOUT.TANKCAROUSELSLOT_DEACTIVATEBUTTON,
-                 'activateButtonEnabled': canSelect,
-                 'activateButtonTooltip': tooltip}
-                vehsData[intCD] = data
+                vehsData[intCD] = self._getVehicleData(vehicle, vState, vStateLvl, rentInfoStr, hasEmptySlots, canSelect, tooltip)
 
         LOG_DEBUG('Updating carousel vehicles: ', vehsData if not isSet else 'full sync')
         self.as_updateVehiclesS(vehsData, isSet)
@@ -276,6 +250,33 @@ class TankCarousel(TankCarouselMeta, GlobalListener):
             icon = icons.premiumIgrSmall()
             return i18n.makeString('#menu:tankCarousel/vehicleStates/%s' % vState, icon=icon)
         return i18n.makeString('#menu:tankCarousel/vehicleStates/%s' % vState)
+
+    def _getVehicleData(self, vehicle, vState, vStateLvl, rentInfoStr, hasEmptySlots, canSelect, tooltip):
+        return {'id': vehicle.invID,
+         'inventoryId': vehicle.invID,
+         'label': vehicle.shortUserName if vehicle.isPremiumIGR else vehicle.userName,
+         'image': vehicle.icon,
+         'nation': vehicle.nationID,
+         'level': vehicle.level,
+         'stat': vState,
+         'statStr': self.getStringStatus(vState),
+         'stateLevel': vStateLvl,
+         'doubleXPReceived': vehicle.dailyXPFactor,
+         'compactDescr': vehicle.intCD,
+         'favorite': vehicle.isFavorite,
+         'clanLock': vehicle.clanLock,
+         'elite': vehicle.isElite,
+         'premium': vehicle.isPremium,
+         'tankType': vehicle.type,
+         'current': 0,
+         'enabled': True,
+         'rentLeft': rentInfoStr,
+         'selectableForSlot': self.__multiselectionMode and vehicle.isFalloutAvailable and hasEmptySlots,
+         'selectedInSlot': self.__multiselectionMode and vehicle.isFalloutSelected,
+         'activateButtonLabel': FALLOUT.TANKCAROUSELSLOT_ACTIVATEBUTTON,
+         'deactivateButtonLabel': FALLOUT.TANKCAROUSELSLOT_DEACTIVATEBUTTON,
+         'activateButtonEnabled': canSelect,
+         'activateButtonTooltip': tooltip}
 
     def __getMultiselectionSlots(self):
         result = []

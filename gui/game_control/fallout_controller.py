@@ -78,7 +78,7 @@ class _UserDataStorage(_BaseDataStorage):
         self.__vehicles = AccountSettings.getFavorites(FALLOUT_VEHICLES)
         self.__updateVehicles()
         g_itemsCache.onSyncCompleted += self.__onItemsResync
-        if self.isEnabled():
+        if self.isEnabled() and self._proxy.isAvailable():
             g_eventDispatcher.addFalloutToCarousel()
         self._proxy.onSettingsChanged()
 

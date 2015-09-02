@@ -1,5 +1,6 @@
 #Embedded file name: scripts/client/gui/Scaleform/daapi/view/lobby/store/Inventory.py
 from account_helpers.AccountSettings import AccountSettings
+from constants import IS_RENTALS_ENABLED
 from debug_utils import LOG_ERROR, LOG_DEBUG
 from gui import getNationIndex, DialogsInterface
 from gui.ClientUpdateManager import g_clientUpdateManager
@@ -95,7 +96,7 @@ class Inventory(InventoryMeta):
                 if type == self._VEHICLE and 'premiumIGR' not in extra:
                     if module.isPremiumIGR:
                         continue
-                if type == self._VEHICLE and 'rentals' not in extra:
+                if type == self._VEHICLE and IS_RENTALS_ENABLED and 'rentals' not in extra:
                     if module.isRented and not module.isPremiumIGR:
                         continue
                 if 'onVehicle' in extra:

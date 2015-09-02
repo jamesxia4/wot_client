@@ -10,7 +10,7 @@ from gui.clubs import contexts as club_ctx, formatters as club_fmts
 from gui.clubs.items import isInvite
 from gui.clubs.club_helpers import ClubListener
 from gui.clubs.settings import CLIENT_CLUB_STATE
-from gui.Scaleform.framework.entities.DAAPIDataProvider import DAAPIDataProvider
+from gui.Scaleform.framework.entities.DAAPIDataProvider import SortableDAAPIDataProvider
 from gui.Scaleform.daapi.view.meta.StaticFormationInvitesAndRequestsMeta import StaticFormationInvitesAndRequestsMeta
 from gui.Scaleform.locale.CYBERSPORT import CYBERSPORT
 
@@ -36,7 +36,7 @@ def _formatInviteStatus(invitation):
     return ''
 
 
-class _DataProvider(DAAPIDataProvider):
+class _DataProvider(SortableDAAPIDataProvider):
 
     def __init__(self):
         super(_DataProvider, self).__init__()
@@ -183,10 +183,11 @@ class StaticFormationInvitesAndRequestsWindow(StaticFormationInvitesAndRequestsM
              'tableHeader': self._createTableHeader()})
 
     def _createTableHeader(self):
-        return [self._createTableBtnInfo(CYBERSPORT.INVITESANDREQUESTSWINDOW_PLAYERNAME, CYBERSPORT.INVITESANDREQUESTSWINDOW_PLAYERNAME, 175), self._createTableBtnInfo('', CYBERSPORT.INVITESANDREQUESTSWINDOW_PLAYERNAME, 81, iconSource=RES_ICONS.MAPS_ICONS_STATISTIC_RATING24), self._createTableBtnInfo(CYBERSPORT.INVITESANDREQUESTSWINDOW_STATUS, CYBERSPORT.INVITESANDREQUESTSWINDOW_STATUS, 139, showSeparator=False)]
+        return [self._createTableBtnInfo('name', CYBERSPORT.INVITESANDREQUESTSWINDOW_PLAYERNAME, CYBERSPORT.INVITESANDREQUESTSWINDOW_PLAYERNAME, 175), self._createTableBtnInfo('rating', '', CYBERSPORT.INVITESANDREQUESTSWINDOW_PLAYERNAME, 81, iconSource=RES_ICONS.MAPS_ICONS_STATISTIC_RATING24), self._createTableBtnInfo('status', CYBERSPORT.INVITESANDREQUESTSWINDOW_STATUS, CYBERSPORT.INVITESANDREQUESTSWINDOW_STATUS, 139, showSeparator=False)]
 
-    def _createTableBtnInfo(self, label, toolTip, buttonWidth, iconSource = '', showSeparator = True):
-        return {'label': label,
+    def _createTableBtnInfo(self, id, label, toolTip, buttonWidth, iconSource = '', showSeparator = True):
+        return {'id': id,
+         'label': label,
          'iconSource': iconSource,
          'toolTip': toolTip,
          'buttonWidth': buttonWidth,

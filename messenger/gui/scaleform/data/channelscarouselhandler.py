@@ -305,7 +305,7 @@ class ChannelsCarouselHandler(object):
                 return
         elif viewType == ViewTypes.LOBBY_SUB:
             view = viewContainer.getView(viewType, criteria)
-            if view is not None and isinstance(view, AbstractWindowView):
+            if hasattr(view, 'onWindowMinimize') and callable(getattr(view, 'onWindowMinimize')):
                 view.onWindowMinimize()
                 return
         fields = {'isNotified': False,

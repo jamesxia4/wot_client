@@ -87,7 +87,7 @@ def init():
      'eqInstalled': lobby.readEquipmentInstalledTriggerSection,
      'freeSlot': lobby.readFreeVehicleSlotTriggerSection,
      'currentVehicle': lobby.readCurrentVehicleChangedTriggerSection,
-     'premium': lobby.readPremiumPeriodChangedTriggerSection,
+     'premiumDiscount': lobby.readPremiumDiscountsUseTriggerSection,
      'freeXP': lobby.readFreeXPChangedTriggerSection,
      'bonus': lobby.readBonusTriggerSection,
      'buyNextLevelVehicle': _readBuyNextLevelVehicleTriggerSection,
